@@ -58,8 +58,8 @@ export function Setup({ workflow }: { workflow: string }) {
         <Reveal className="lg:col-start-1 lg:row-start-1">
           <Step n="1" title="Try it on your machine" note="Nothing to install or configure. Run it inside a repository, on the branch you want to check.">
             <div className="mt-4 space-y-2">
-              <Command command="npx isoklo doctor" />
               <Command command="npx isoklo check" />
+              <Command command="npx isoklo doctor" />
             </div>
             <p className="mt-3 text-[13px] text-stone-600">
               Needs Node.js 22 or later and git. Exit <span className="font-mono">0</span> passed, <span className="font-mono">1</span> blocked,{" "}
@@ -68,7 +68,7 @@ export function Setup({ workflow }: { workflow: string }) {
           </Step>
         </Reveal>
         <Reveal delay={0.03} className="min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-        <Step n="2" title="Add the workflow" note={<>Save it as <code className="font-mono text-[13px] text-ink">.github/workflows/isoklo.yml</code>. Findings appear on the changed lines and in a summary on the Checks page.</>}>
+        <Step n="2" title="Add the workflow" note={<>Save it as <code className="font-mono text-[13px] text-ink">.github/workflows/isoklo.yml</code>. Findings appear on the changed lines and in a summary on the Checks page. Coming from the GitHub Marketplace? Its snippet is only the <code className="font-mono text-[13px] text-ink">uses:</code> line; this is the complete workflow.</>}>
           <div className="mt-4 overflow-hidden rounded-xl border border-stone-200 bg-surface">
             <div className="flex h-11 items-center justify-between gap-3 border-b border-stone-200 bg-stone-50 pl-4 pr-1.5">
               <p className="truncate font-mono text-[12px] text-stone-600">.github/workflows/isoklo.yml</p>

@@ -4,7 +4,7 @@ export const site = {
   tagline: "Proof before merge.",
   description:
     "Isoklo is a merge gate for AI coding agents. It blocks a pull request, with the exact line as evidence, when the change weakens tests, adds a package that doesn't exist, or widens what agents and CI may do.",
-  version: "0.1.1",
+  version: "0.1.2",
   license: "FSL-1.1-ALv2",
   // NEXT_PUBLIC_SITE_URL wins; on Vercel, fall back to the project's production domain until isoklo.com is attached.
   url:

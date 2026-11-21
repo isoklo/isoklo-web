@@ -1,6 +1,6 @@
 {
   "generatedFrom": {
-    "isoklo": "0.1.1",
+    "isoklo": "0.1.2",
     "repo": "isoklo/isoklo-demo"
   },
   "prs": [
@@ -420,7 +420,7 @@
         "exitCode": 0
       },
       "check": {
-        "output": "isoklo check · main...HEAD · 2 files changed, 0 test files, 1 new package, 0 config files\n\n✕ blocked  Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-20 18:46 UTC).\n             package.json:15  \"invoice-pdf-renderer-lite\": \"^2.1.0\"\n           fix: check the name; an agent may have invented it, and someone could register it with malicious code.\n\nblocked · 1 problem must be fixed before merge.",
+        "output": "isoklo check · main...HEAD · 2 files changed, 0 test files, 1 new package, 0 config files\n\n✕ blocked  Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-21 17:36 UTC).\n             package.json:15  \"invoice-pdf-renderer-lite\": \"^2.1.0\"\n           fix: check the name; an agent may have invented it, and someone could register it with malicious code.\n\nblocked · 1 problem must be fixed before merge.",
         "exitCode": 1,
         "verdict": "blocked",
         "results": [
@@ -443,7 +443,7 @@
                 "rule": "unknown-packages",
                 "id": "package-does-not-exist",
                 "level": "blocked",
-                "message": "Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-20 18:46 UTC).",
+                "message": "Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-21 17:36 UTC).",
                 "fix": "check the name; an agent may have invented it, and someone could register it with malicious code.",
                 "evidence": [
                   {
@@ -1399,7 +1399,7 @@
     "json": {
       "tool": "isoklo",
       "command": "doctor",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "tokensAreEstimates": true,
       "files": [
         {
@@ -1519,7 +1519,7 @@
     "skipped": 0,
     "exitCode": 0
   },
-  "workflow": "name: isoklo\n\non:\n  pull_request: # never pull_request_target: the gate reads untrusted code, so it gets no secrets\n\npermissions:\n  contents: read\n\njobs:\n  check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          fetch-depth: 0 # full history: Isoklo compares the pull request with where it left the base branch\n          persist-credentials: false\n\n      - uses: isoklo/isoklo@v0\n        with:\n          # Optional: a maintainer adds the \"isoklo-allow-config\" label to accept a deliberate config change.\n          allow-config-change: ${{ contains(github.event.pull_request.labels.*.name, 'isoklo-allow-config') && 'label isoklo-allow-config applied by a maintainer' || '' }}\n",
+  "workflow": "name: isoklo\n\non:\n  pull_request: # never pull_request_target: the gate reads untrusted code, so it gets no secrets\n\npermissions:\n  contents: read\n\njobs:\n  check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          fetch-depth: 0 # full history: Isoklo compares the pull request with where it left the base branch\n          persist-credentials: false\n\n      - uses: isoklo/isoklo@v0\n        with:\n          # Optional: a maintainer adds the \"isoklo-allow-config\" label to accept a deliberate config change.\n          allow-config-change: ${{ contains(github.event.pull_request.labels.*.name, 'isoklo-allow-config') && 'label isoklo-allow-config applied by a maintainer' || '' }}\n",
   "overrides": {
     "config": {
       "before": "isoklo check · main...HEAD · 4 files changed, 1 test file, 0 new packages, 1 config file\n\n✕ blocked  Agent permissions widened: \"Bash(*)\", \"WebFetch(domain:*)\" let the agent run anything without asking.\n             .claude/settings.json:8  \"Bash(*)\",\n             .claude/settings.json:9  \"WebFetch(domain:*)\"\n           fix: allow only the specific commands the project needs, and have a maintainer make this change.\n\nblocked · 1 problem must be fixed before merge.",
