@@ -20,6 +20,16 @@ export default function Home() {
         {/* ---------------------------------------------------------------- hero */}
         <section className="relative">
           <div className="mx-auto max-w-[1200px] px-4 pb-14 pt-16 sm:px-6 sm:pt-24 lg:pb-16 lg:pt-28">
+            <a
+              href="https://euklo.com/isoklo/"
+              data-lift-fade
+              style={{ ["--i" as string]: 1 }}
+              className="mb-8 inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-full border border-stone-200 bg-surface px-4 py-2 text-[13.5px] text-stone-700 transition-colors duration-150 hover:border-stone-400 hover:text-ink"
+            >
+              <span className="font-mono text-[11.5px] uppercase tracking-[0.14em] text-ice-deep">New in {site.version}</span>
+              62 rules, npx isoklo with no setup, and a GitHub App. See what&apos;s new
+              <span aria-hidden="true">→</span>
+            </a>
             <div data-lift-fade style={{ ["--i" as string]: 2 }}>
               <p className="flex items-center gap-2.5 font-mono text-[11.5px] uppercase tracking-[0.16em] text-stone-600">
                 <span className="size-1.5 rounded-[1px] bg-ice-deep" aria-hidden="true" />
@@ -34,11 +44,11 @@ export default function Home() {
               Proof before merge.
             </h1>
             <p data-lift-fade style={{ ["--i" as string]: 4 }} className="mt-7 max-w-[40rem] text-pretty text-[1.1875rem] leading-[1.55] text-stone-700 sm:text-[1.3125rem]">
-              Isoklo checks every pull request before a person spends time on it. When an agent weakens a test, adds a
-              package that doesn&apos;t exist, or widens its own permissions, Isoklo blocks the merge and shows the exact line.
+              Isoklo checks every pull request before a person spends time on it. When an agent weakens a test, invents a
+              package, leaks a secret or widens its own permissions, Isoklo blocks the merge and shows the exact line.
             </p>
             <div data-lift-fade style={{ ["--i" as string]: 5 }} className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Command command="npx isoklo check" className="w-full sm:w-[300px]" />
+              <Command command="npx isoklo" className="w-full sm:w-[300px]" />
               <a
                 href="#setup"
                 className="inline-flex h-[46px] items-center justify-center gap-2 rounded-xl bg-ink px-5 text-[15px] font-medium text-paper shadow-[0_1px_2px_rgb(17_16_14/0.2)] transition-[background-color,transform] duration-150 hover:bg-stone-800 active:scale-[0.98]"
@@ -69,10 +79,13 @@ export default function Home() {
           </div>
         </section>
 
-        <Section id="checks" eyebrow="isoklo check" title="Three rules. Fixed, so the same change always gets the same verdict.">
+        <Section id="checks" eyebrow="isoklo check" title="Where it started: three rules. Fixed, so the same change always gets the same verdict.">
           Every finding is <span className="font-medium text-blocked">blocked</span> (the check fails),{" "}
           <span className="font-medium text-review">review</span> (worth a person&apos;s look; the check passes) or info.
-          Blocks always carry the file and line as evidence.
+          Blocks always carry the file and line as evidence. Version {site.version} keeps all three and grows them to 62
+          rules in six suites; the{" "}
+          <a href="https://euklo.com/isoklo/#rules" className="font-medium text-ink underline decoration-stone-300 underline-offset-[3px] hover:decoration-ink">full table</a>{" "}
+          is on euklo.com.
         </Section>
         <Container><Rules /></Container>
 
@@ -97,7 +110,8 @@ export default function Home() {
         <Container><Privacy /></Container>
 
         <Section id="setup" eyebrow="Setup · about a minute" title="Add it to GitHub.">
-          Three steps: try it locally, add the workflow, then make the check required.
+          Three steps: try it locally, add the workflow, then make the check required. Or run{" "}
+          <code className="font-mono text-[0.92em] text-ink">npx isoklo init</code>, which writes the workflow for you.
         </Section>
         <Container><Setup workflow={demo.workflow} /></Container>
 

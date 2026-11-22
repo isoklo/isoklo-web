@@ -5,26 +5,26 @@ import { useState } from "react";
 import { site } from "@/lib/site";
 import { Reveal } from "./ui";
 
-/** Shipped and planned, worded from the Isoklo README (Roadmap, Limits) and CHANGELOG. Nothing here is promised by date. */
+/** Shipped and planned, worded from the Isoklo 0.2.0 README (Commands, Limits) and CHANGELOG. Nothing here is promised by date. */
 const SHIPPED = [
-  { t: "isoklo check", d: "Test integrity, packages that don't exist, and agent and CI configuration." },
-  { t: "isoklo doctor", d: "Which agent reads which instruction file, across seven agents." },
-  { t: "GitHub Action", d: "isoklo/isoklo@v0: notes on the changed lines and a job summary." },
-  { t: "Escape hatches", d: "Test comments, the maintainer label, private scopes in .npmrc." },
-  { t: "Machine output", d: "--json for scripts; exit 0 passed, 1 blocked, 2 could not run." },
+  { t: "npx isoklo", d: "62 fixed rules, no setup: tests and type checks, packages, secrets, agent and MCP config, CI, scope." },
+  { t: "isoklo init", d: "A pre-push hook, the CI job (GitHub or GitLab) and a baseline of today's findings, in one command." },
+  { t: "GitHub App", d: "No YAML: a check run with line annotations and one summary comment per pull request." },
+  { t: "isoklo doctor", d: "Which agent reads which instruction file, plus an A to F posture grade." },
+  { t: "Evidence", d: "Receipts with a SHA-256 digest (optionally signed), isoklo verify, isoklo report --html, and --sarif." },
+  { t: "Escape hatches", d: "Test comments, the maintainer label, a baseline, private scopes in .npmrc." },
 ];
 
 const PLANNED = [
-  { t: "Scope", d: "Block changes that stray outside the issue they claim to fix." },
-  { t: "Rule proving", d: "isoklo rules prove: replay your own merged pull requests with and without each agent rule, to show which rules actually help." },
   { t: "More package ecosystems", d: "Beyond npm and PyPI." },
+  { t: "Paid plans", d: "Private repositories on the GitHub App, with signed and stored receipts. Everything is free while we launch." },
 ];
 
 const LIMITS = [
   { t: "It does not judge code quality", d: "or find bugs in your logic. It catches specific, provable ways a change can make a repository less safe." },
-  { t: "Its patterns are heuristics.", d: "An unusual test style can be missed. Misses are far more likely than false blocks, and every block shows its evidence." },
-  { t: "Packages: npm and PyPI only,", d: "from package.json, requirements*.txt and pyproject.toml. Lockfiles and other ecosystems are not checked yet." },
-  { t: "CI integration is built for GitHub Actions.", d: "Elsewhere, use the exit code and --json." },
+  { t: "Its patterns are heuristics.", d: "An unusual style can be missed. Misses are far more likely than false blocks, and every block shows its evidence." },
+  { t: "Packages: npm and PyPI.", d: "Lockfile sources are checked for npm, Yarn, pnpm, Bun, Poetry, Pipenv and uv." },
+  { t: "CI integration is built for GitHub and GitLab.", d: "Elsewhere, use the exit code, --json and --sarif." },
 ];
 
 const FAQ = [

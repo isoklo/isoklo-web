@@ -3,8 +3,8 @@ export const site = {
   name: "Isoklo",
   tagline: "Proof before merge.",
   description:
-    "Isoklo is a merge gate for AI coding agents. It blocks a pull request, with the exact line as evidence, when the change weakens tests, adds a package that doesn't exist, or widens what agents and CI may do.",
-  version: "0.1.2",
+    "Isoklo is a deterministic merge gate for AI-written pull requests. It blocks a change, with the exact line as evidence, when it weakens tests, invents a package, leaks a secret, or widens what agents and CI may do.",
+  version: "0.2.0",
   license: "FSL-1.1-ALv2",
   // NEXT_PUBLIC_SITE_URL wins; on Vercel, fall back to the project's production domain until isoklo.com is attached.
   url:
@@ -19,10 +19,10 @@ export const site = {
   issues: "https://github.com/isoklo/isoklo/issues",
 } as const;
 
-/** The parent company. Switch `url` to https://euklo.com once that domain serves the site. */
+/** The parent company. */
 export const euklo = {
   name: "Euklo",
-  url: "https://euklo.vercel.app",
+  url: "https://euklo.com",
   line: "AI agent and LLM tooling, for developers.",
   about: "Euklo is a developer-focused studio for AI agent and LLM tooling. Isoklo is built by Euklo.",
 } as const;

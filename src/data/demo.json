@@ -1,6 +1,6 @@
 {
   "generatedFrom": {
-    "isoklo": "0.1.2",
+    "isoklo": "0.2.0",
     "repo": "isoklo/isoklo-demo"
   },
   "prs": [
@@ -19,7 +19,7 @@
         "exitCode": 0
       },
       "check": {
-        "output": "isoklo check · main...HEAD · 2 files changed, 1 test file, 0 new packages, 0 config files\n\n✕ blocked  Tests weakened: 2 assertions removed, 1 added in their place, 1 check fewer.\n             test/invoice.test.js:25  assert.equal(invoice.tax, 11138); // 8.25% of $1,350.00 = $111.375, rounded half up\n             test/invoice.test.js:26  assert.equal(invoice.total, 146138);\n           fix: restore the removed assertions, or replace each one with an assertion that checks the same behaviour.\n\n✕ blocked  Test disabled: test/invoice.test.js:35 skips a test.\n             test/invoice.test.js:35  test.skip(\"a fixed discount never takes the total below zero\", () => {\n           fix: remove the skip or focus marker, or fix the test so it can run.\n\nblocked · 2 problems must be fixed before merge.",
+        "output": "isoklo check · main...HEAD · 2 files changed, 1 test file, 0 new packages, 0 config files\n\n✕ blocked  Tests weakened: 2 assertions removed, 1 added in their place, 1 check fewer.\n           HIGH · tamper/assertions-removed\n             test/invoice.test.js:25  assert.equal(invoice.tax, 11138); // 8.25% of $1,350.00 = $111.375, rounded half up\n             test/invoice.test.js:26  assert.equal(invoice.total, 146138);\n           why: Fewer assertions means less behaviour is checked; the build turns green because it checks less, not because the code is right.\n           fix: restore the removed assertions, or replace each one with an assertion that checks the same behaviour.\n\n✕ blocked  Test disabled: test/invoice.test.js:35 skips a test.\n           HIGH · tamper/test-disabled\n             test/invoice.test.js:35  test.skip(\"a fixed discount never takes the total below zero\", () => {\n           why: .skip silences a failing test; .only silently stops every other test from running.\n           fix: remove the skip or focus marker, or fix the test so it can run.\n\nblocked · 2 problems must be fixed before merge.",
         "exitCode": 1,
         "verdict": "blocked",
         "results": [
@@ -51,7 +51,10 @@
                       "line": 24
                     }
                   }
-                ]
+                ],
+                "ruleId": "tamper/assertions-removed",
+                "severity": "high",
+                "fingerprint": "651a3ec3712b5db7"
               },
               {
                 "rule": "weakened-tests",
@@ -65,7 +68,10 @@
                     "line": 35,
                     "text": "test.skip(\"a fixed discount never takes the total below zero\", () => {"
                   }
-                ]
+                ],
+                "ruleId": "tamper/test-disabled",
+                "severity": "high",
+                "fingerprint": "cb113427bc53fe76"
               }
             ],
             "passes": [
@@ -96,6 +102,54 @@
             "stats": {
               "configFiles": 0
             }
+          },
+          {
+            "rule": "agent",
+            "findings": [],
+            "passes": [
+              "No hidden Unicode, prompt-override text or disabled agent approvals added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "mcp",
+            "findings": [],
+            "passes": [
+              "No unpinned, secret-bearing or over-reaching MCP servers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "tamper",
+            "findings": [],
+            "passes": [
+              "No checks suppressed, guardrail configs weakened or coverage lowered."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "deps",
+            "findings": [],
+            "passes": [
+              "No untrusted lockfile sources, install-time scripts or registry changes."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "sec",
+            "findings": [],
+            "passes": [
+              "No secrets, remote code execution, exfiltration or unsafe workflow triggers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "scope",
+            "findings": [],
+            "passes": [
+              "No out-of-scope edits or sensitive areas changed alongside unrelated work."
+            ],
+            "stats": {}
           }
         ]
       },
@@ -420,7 +474,7 @@
         "exitCode": 0
       },
       "check": {
-        "output": "isoklo check · main...HEAD · 2 files changed, 0 test files, 1 new package, 0 config files\n\n✕ blocked  Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-21 17:36 UTC).\n             package.json:15  \"invoice-pdf-renderer-lite\": \"^2.1.0\"\n           fix: check the name; an agent may have invented it, and someone could register it with malicious code.\n\nblocked · 1 problem must be fixed before merge.",
+        "output": "isoklo check · main...HEAD · 2 files changed, 0 test files, 1 new package, 0 config files\n\n✕ blocked  Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-22 11:37 UTC).\n           CRITICAL · deps/package-does-not-exist\n             package.json:15  \"invoice-pdf-renderer-lite\": \"^2.1.0\"\n           why: Agents invent plausible package names. Attackers register those names with malware (slopsquatting), so the next install runs their code.\n           fix: check the name; an agent may have invented it, and someone could register it with malicious code.\n\nblocked · 1 problem must be fixed before merge.",
         "exitCode": 1,
         "verdict": "blocked",
         "results": [
@@ -443,7 +497,7 @@
                 "rule": "unknown-packages",
                 "id": "package-does-not-exist",
                 "level": "blocked",
-                "message": "Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-21 17:36 UTC).",
+                "message": "Package does not exist: invoice-pdf-renderer-lite is not on npm (checked 2026-11-22 11:37 UTC).",
                 "fix": "check the name; an agent may have invented it, and someone could register it with malicious code.",
                 "evidence": [
                   {
@@ -451,7 +505,10 @@
                     "line": 15,
                     "text": "\"invoice-pdf-renderer-lite\": \"^2.1.0\""
                   }
-                ]
+                ],
+                "ruleId": "deps/package-does-not-exist",
+                "severity": "critical",
+                "fingerprint": "02f24d4bceee27c8"
               }
             ],
             "passes": [],
@@ -468,6 +525,54 @@
             "stats": {
               "configFiles": 0
             }
+          },
+          {
+            "rule": "agent",
+            "findings": [],
+            "passes": [
+              "No hidden Unicode, prompt-override text or disabled agent approvals added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "mcp",
+            "findings": [],
+            "passes": [
+              "No unpinned, secret-bearing or over-reaching MCP servers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "tamper",
+            "findings": [],
+            "passes": [
+              "No checks suppressed, guardrail configs weakened or coverage lowered."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "deps",
+            "findings": [],
+            "passes": [
+              "No untrusted lockfile sources, install-time scripts or registry changes."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "sec",
+            "findings": [],
+            "passes": [
+              "No secrets, remote code execution, exfiltration or unsafe workflow triggers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "scope",
+            "findings": [],
+            "passes": [
+              "No out-of-scope edits or sensitive areas changed alongside unrelated work."
+            ],
+            "stats": {}
           }
         ]
       },
@@ -681,7 +786,7 @@
         "exitCode": 0
       },
       "check": {
-        "output": "isoklo check · main...HEAD · 4 files changed, 1 test file, 0 new packages, 1 config file\n\n✕ blocked  Agent permissions widened: \"Bash(*)\", \"WebFetch(domain:*)\" let the agent run anything without asking.\n             .claude/settings.json:8  \"Bash(*)\",\n             .claude/settings.json:9  \"WebFetch(domain:*)\"\n           fix: allow only the specific commands the project needs, and have a maintainer make this change.\n\nblocked · 1 problem must be fixed before merge.",
+        "output": "isoklo check · main...HEAD · 4 files changed, 1 test file, 0 new packages, 1 config file\n\n✕ blocked  Agent permissions widened: \"Bash(*)\", \"WebFetch(domain:*)\" let the agent run anything without asking.\n           CRITICAL · agent/permission-wide\n             .claude/settings.json:8  \"Bash(*)\",\n             .claude/settings.json:9  \"WebFetch(domain:*)\"\n           why: Wildcard allow rules (*, Bash, Bash(*), mcp__*, WebFetch(domain:*)) and risky commands (curl, rm, sudo, git push) are pre-approved, so the agent never asks before acting. An injected instruction runs with your credentials.\n           fix: allow only the specific commands the project needs, and have a maintainer make this change.\n\nblocked · 1 problem must be fixed before merge.",
         "exitCode": 1,
         "verdict": "blocked",
         "results": [
@@ -729,13 +834,64 @@
                     "line": 9,
                     "text": "\"WebFetch(domain:*)\""
                   }
-                ]
+                ],
+                "ruleId": "agent/permission-wide",
+                "severity": "critical",
+                "fingerprint": "329abf16c3b2b8aa"
               }
             ],
             "passes": [],
             "stats": {
               "configFiles": 1
             }
+          },
+          {
+            "rule": "agent",
+            "findings": [],
+            "passes": [
+              "No hidden Unicode, prompt-override text or disabled agent approvals added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "mcp",
+            "findings": [],
+            "passes": [
+              "No unpinned, secret-bearing or over-reaching MCP servers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "tamper",
+            "findings": [],
+            "passes": [
+              "No checks suppressed, guardrail configs weakened or coverage lowered."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "deps",
+            "findings": [],
+            "passes": [
+              "No untrusted lockfile sources, install-time scripts or registry changes."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "sec",
+            "findings": [],
+            "passes": [
+              "No secrets, remote code execution, exfiltration or unsafe workflow triggers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "scope",
+            "findings": [],
+            "passes": [
+              "No out-of-scope edits or sensitive areas changed alongside unrelated work."
+            ],
+            "stats": {}
           }
         ]
       },
@@ -1094,7 +1250,7 @@
         "exitCode": 0
       },
       "check": {
-        "output": "isoklo check · main...HEAD · 2 files changed, 1 test file, 0 new packages, 0 config files\n\n✓ passed   No test files deleted.\n✓ passed   No assertions removed.\n✓ passed   No tests skipped or focused.\n✓ passed   No new packages.\n✓ passed   No agent or CI configuration changed.\n\npassed.",
+        "output": "isoklo check · main...HEAD · 2 files changed, 1 test file, 0 new packages, 0 config files\n\n✓ passed   No test files deleted.\n✓ passed   No assertions removed.\n✓ passed   No tests skipped or focused.\n✓ passed   No new packages.\n✓ passed   No agent or CI configuration changed.\n✓ passed   No hidden Unicode, prompt-override text or disabled agent approvals added.\n✓ passed   No unpinned, secret-bearing or over-reaching MCP servers added.\n✓ passed   No checks suppressed, guardrail configs weakened or coverage lowered.\n✓ passed   No untrusted lockfile sources, install-time scripts or registry changes.\n✓ passed   No secrets, remote code execution, exfiltration or unsafe workflow triggers added.\n✓ passed   No out-of-scope edits or sensitive areas changed alongside unrelated work.\n\npassed.",
         "exitCode": 0,
         "verdict": "passed",
         "results": [
@@ -1131,6 +1287,54 @@
             "stats": {
               "configFiles": 0
             }
+          },
+          {
+            "rule": "agent",
+            "findings": [],
+            "passes": [
+              "No hidden Unicode, prompt-override text or disabled agent approvals added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "mcp",
+            "findings": [],
+            "passes": [
+              "No unpinned, secret-bearing or over-reaching MCP servers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "tamper",
+            "findings": [],
+            "passes": [
+              "No checks suppressed, guardrail configs weakened or coverage lowered."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "deps",
+            "findings": [],
+            "passes": [
+              "No untrusted lockfile sources, install-time scripts or registry changes."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "sec",
+            "findings": [],
+            "passes": [
+              "No secrets, remote code execution, exfiltration or unsafe workflow triggers added."
+            ],
+            "stats": {}
+          },
+          {
+            "rule": "scope",
+            "findings": [],
+            "passes": [
+              "No out-of-scope edits or sensitive areas changed alongside unrelated work."
+            ],
+            "stats": {}
           }
         ]
       },
@@ -1394,12 +1598,12 @@
     }
   ],
   "doctor": {
-    "output": "isoklo doctor · ~/isoklo-demo\n\nInstruction files\n  CLAUDE.md                            ~55 tokens   read by Claude Code, GitHub Copilot\n  AGENTS.md                           ~116 tokens   read by Codex, Cursor, GitHub Copilot, Antigravity CLI, Devin Desktop (the cross-agent standard)\n  GEMINI.md                           ~116 tokens   read by Gemini CLI, Antigravity CLI, GitHub Copilot (Gemini CLI was replaced by Antigravity CLI for free and consumer tiers on 2026-06-18)\n  .cursorrules                         ~32 tokens   read by Cursor (legacy format; no longer in Cursor's docs and planned for deprecation)\n  .cursor/rules/billing.mdc            ~67 tokens   read by Cursor\n  .github/copilot-instructions.md       ~0 tokens   read by GitHub Copilot\n  .devin/rules/style.md                ~47 tokens   read by Devin Desktop (formerly Windsurf)\n\nFindings\n  ! review  Claude Code ignores AGENTS.md here: CLAUDE.md exists and does not import it.\n            fix: add the line `@AGENTS.md` to CLAUDE.md, or make CLAUDE.md a symlink to AGENTS.md.\n  ! review  AGENTS.md and GEMINI.md are identical copies; they will drift apart the first time one is edited.\n            fix: keep one file and import or symlink it from the others.\n  ! review  .github/copilot-instructions.md is empty, so it gives agents nothing.\n            fix: add instructions or delete the file.\n  ! review  .cursorrules (legacy) and .cursor/rules both exist; the two can disagree.\n            fix: move its rules into .cursor/rules, or into AGENTS.md so every agent shares them.\n\n4 findings to review. Estimated total: ~433 tokens of instructions. Doctor is advisory and never blocks a merge.",
+    "output": "isoklo doctor · ~/isoklo-demo\n\nInstruction files\n  CLAUDE.md                            ~55 tokens   read by Claude Code, GitHub Copilot\n  AGENTS.md                           ~116 tokens   read by Codex, Cursor, GitHub Copilot, Antigravity CLI, Devin Desktop (the cross-agent standard)\n  GEMINI.md                           ~116 tokens   read by Gemini CLI, Antigravity CLI, GitHub Copilot (Gemini CLI was replaced by Antigravity CLI for free and consumer tiers on 2026-06-18)\n  .cursorrules                         ~32 tokens   read by Cursor (legacy format; no longer in Cursor's docs and planned for deprecation)\n  .cursor/rules/billing.mdc            ~67 tokens   read by Cursor\n  .github/copilot-instructions.md       ~0 tokens   read by GitHub Copilot\n  .devin/rules/style.md                ~47 tokens   read by Devin Desktop (formerly Windsurf)\n\nFindings\n  ! review  Claude Code ignores AGENTS.md here: CLAUDE.md exists and does not import it.\n            fix: add the line `@AGENTS.md` to CLAUDE.md, or make CLAUDE.md a symlink to AGENTS.md.\n  ! review  AGENTS.md and GEMINI.md are identical copies; they will drift apart the first time one is edited.\n            fix: keep one file and import or symlink it from the others.\n  ! review  .github/copilot-instructions.md is empty, so it gives agents nothing.\n            fix: add instructions or delete the file.\n  ! review  .cursorrules (legacy) and .cursor/rules both exist; the two can disagree.\n            fix: move its rules into .cursor/rules, or into AGENTS.md so every agent shares them.\n\nPosture  A · 96/100 · Agent changes are gated and the repository carries no serious findings.\n  ✓ Merge gate in CI: .github/workflows/isoklo.yml runs Isoklo on every change.\n  ✓ Pre-push hook: No pre-push hook; CI gates every change, so this is optional.\n  ✓ Workflow token permissions: All 2 workflows declare their token permissions.\n  △ Dependency lockfile: package.json has no committed lockfile, so every install can resolve different (possibly hijacked) versions.\n      fix: commit the lockfile your package manager writes.\n  ✓ .env ignored: .env files are ignored by git.\n  △ Owners for agent and CI config: No CODEOWNERS file: nobody is required to review changes to agent or CI configuration.\n      fix: add lines such as `/.github/ @your-team`, `/.claude/ @your-team`, `/.mcp.json @your-team`, `/AGENTS.md @your-team` to .github/CODEOWNERS.\n  ✓ Agent configuration found: Agent configuration in this repository: .claude, .cursor, .devin, AGENTS.md, CLAUDE.md. Isoklo scanned it.\n  ✓ Files: no problems found by the scan.\n\n4 findings to review. Estimated total: ~433 tokens of instructions. Doctor is advisory and never blocks a merge.",
     "exitCode": 0,
     "json": {
       "tool": "isoklo",
       "command": "doctor",
-      "version": "0.1.2",
+      "version": "0.2.0",
       "tokensAreEstimates": true,
       "files": [
         {
@@ -1510,7 +1714,77 @@
           ]
         }
       ],
-      "totalTokens": 433
+      "totalTokens": 433,
+      "posture": {
+        "grade": "A",
+        "score": 96,
+        "meaning": "Agent changes are gated and the repository carries no serious findings.",
+        "checks": [
+          {
+            "id": "merge-gate-ci",
+            "title": "Merge gate in CI",
+            "status": "pass",
+            "severity": "high",
+            "detail": ".github/workflows/isoklo.yml runs Isoklo on every change."
+          },
+          {
+            "id": "pre-push-hook",
+            "title": "Pre-push hook",
+            "status": "pass",
+            "severity": "info",
+            "detail": "No pre-push hook; CI gates every change, so this is optional.",
+            "fix": "run `npx isoklo init --hook`."
+          },
+          {
+            "id": "workflow-permissions",
+            "title": "Workflow token permissions",
+            "status": "pass",
+            "severity": "medium",
+            "detail": "All 2 workflows declare their token permissions."
+          },
+          {
+            "id": "lockfile",
+            "title": "Dependency lockfile",
+            "status": "warn",
+            "severity": "medium",
+            "detail": "package.json has no committed lockfile, so every install can resolve different (possibly hijacked) versions.",
+            "fix": "commit the lockfile your package manager writes."
+          },
+          {
+            "id": "env-ignored",
+            "title": ".env ignored",
+            "status": "pass",
+            "severity": "medium",
+            "detail": ".env files are ignored by git."
+          },
+          {
+            "id": "config-owners",
+            "title": "Owners for agent and CI config",
+            "status": "warn",
+            "severity": "medium",
+            "detail": "No CODEOWNERS file: nobody is required to review changes to agent or CI configuration.",
+            "fix": "add lines such as `/.github/ @your-team`, `/.claude/ @your-team`, `/.mcp.json @your-team`, `/AGENTS.md @your-team` to .github/CODEOWNERS."
+          },
+          {
+            "id": "agent-config-present",
+            "title": "Agent configuration found",
+            "status": "pass",
+            "severity": "info",
+            "detail": "Agent configuration in this repository: .claude, .cursor, .devin, AGENTS.md, CLAUDE.md. Isoklo scanned it."
+          }
+        ],
+        "deductions": [
+          {
+            "source": "Dependency lockfile",
+            "points": 2
+          },
+          {
+            "source": "Owners for agent and CI config",
+            "points": 2
+          }
+        ],
+        "scanFindings": []
+      }
     }
   },
   "mainTests": {
@@ -1522,24 +1796,24 @@
   "workflow": "name: isoklo\n\non:\n  pull_request: # never pull_request_target: the gate reads untrusted code, so it gets no secrets\n\npermissions:\n  contents: read\n\njobs:\n  check:\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v7\n        with:\n          fetch-depth: 0 # full history: Isoklo compares the pull request with where it left the base branch\n          persist-credentials: false\n\n      - uses: isoklo/isoklo@v0\n        with:\n          # Optional: a maintainer adds the \"isoklo-allow-config\" label to accept a deliberate config change.\n          allow-config-change: ${{ contains(github.event.pull_request.labels.*.name, 'isoklo-allow-config') && 'label isoklo-allow-config applied by a maintainer' || '' }}\n",
   "overrides": {
     "config": {
-      "before": "isoklo check · main...HEAD · 4 files changed, 1 test file, 0 new packages, 1 config file\n\n✕ blocked  Agent permissions widened: \"Bash(*)\", \"WebFetch(domain:*)\" let the agent run anything without asking.\n             .claude/settings.json:8  \"Bash(*)\",\n             .claude/settings.json:9  \"WebFetch(domain:*)\"\n           fix: allow only the specific commands the project needs, and have a maintainer make this change.\n\nblocked · 1 problem must be fixed before merge.",
+      "before": "isoklo check · main...HEAD · 4 files changed, 1 test file, 0 new packages, 1 config file\n\n✕ blocked  Agent permissions widened: \"Bash(*)\", \"WebFetch(domain:*)\" let the agent run anything without asking.\n           CRITICAL · agent/permission-wide\n             .claude/settings.json:8  \"Bash(*)\",\n             .claude/settings.json:9  \"WebFetch(domain:*)\"\n           why: Wildcard allow rules (*, Bash, Bash(*), mcp__*, WebFetch(domain:*)) and risky commands (curl, rm, sudo, git push) are pre-approved, so the agent never asks before acting. An injected instruction runs with your credentials.\n           fix: allow only the specific commands the project needs, and have a maintainer make this change.\n\nblocked · 1 problem must be fixed before merge.",
       "beforeExit": 1,
-      "after": "isoklo check · main...HEAD · 4 files changed, 1 test file, 0 new packages, 1 config file\n\n! review   Agent permissions widened: \"Bash(*)\", \"WebFetch(domain:*)\" let the agent run anything without asking.\n             .claude/settings.json:8  \"Bash(*)\",\n             .claude/settings.json:9  \"WebFetch(domain:*)\"\n           allowed: label isoklo-allow-config applied by a maintainer\n\n✓ passed   No test files deleted.\n✓ passed   No assertions removed.\n✓ passed   No tests skipped or focused.\n✓ passed   No new packages.\n\npassed · 1 to review.",
+      "after": "isoklo check · main...HEAD · 4 files changed, 1 test file, 0 new packages, 1 config file\n\n! review   Agent permissions widened: \"Bash(*)\", \"WebFetch(domain:*)\" let the agent run anything without asking.\n           CRITICAL · agent/permission-wide\n             .claude/settings.json:8  \"Bash(*)\",\n             .claude/settings.json:9  \"WebFetch(domain:*)\"\n           why: Wildcard allow rules (*, Bash, Bash(*), mcp__*, WebFetch(domain:*)) and risky commands (curl, rm, sudo, git push) are pre-approved, so the agent never asks before acting. An injected instruction runs with your credentials.\n           allowed: label isoklo-allow-config applied by a maintainer\n\n✓ passed   No test files deleted.\n✓ passed   No assertions removed.\n✓ passed   No tests skipped or focused.\n✓ passed   No new packages.\n✓ passed   No hidden Unicode, prompt-override text or disabled agent approvals added.\n✓ passed   No unpinned, secret-bearing or over-reaching MCP servers added.\n✓ passed   No checks suppressed, guardrail configs weakened or coverage lowered.\n✓ passed   No untrusted lockfile sources, install-time scripts or registry changes.\n✓ passed   No secrets, remote code execution, exfiltration or unsafe workflow triggers added.\n✓ passed   No out-of-scope edits or sensitive areas changed alongside unrelated work.\n\npassed · 1 to review.",
       "afterExit": 0,
       "reason": "label isoklo-allow-config applied by a maintainer"
     },
     "tests": {
       "marker": "// isoklo: allow-test-change total([]) is now covered in test/empty.test.js",
-      "before": "isoklo check · main...HEAD · 1 file changed, 1 test file, 0 new packages, 0 config files\n\n✕ blocked  Tests weakened: 1 assertion removed, 0 added in their place, 1 check fewer.\n             test/cart.test.js:3  expect(total([])).toBe(0);\n           fix: restore the removed assertions, or replace each one with an assertion that checks the same behaviour.\n\nblocked · 1 problem must be fixed before merge.",
+      "before": "isoklo check · main...HEAD · 1 file changed, 1 test file, 0 new packages, 0 config files\n\n✕ blocked  Tests weakened: 1 assertion removed, 0 added in their place, 1 check fewer.\n           HIGH · tamper/assertions-removed\n             test/cart.test.js:3  expect(total([])).toBe(0);\n           why: Fewer assertions means less behaviour is checked; the build turns green because it checks less, not because the code is right.\n           fix: restore the removed assertions, or replace each one with an assertion that checks the same behaviour.\n\nblocked · 1 problem must be fixed before merge.",
       "beforeExit": 1,
-      "after": "isoklo check · main...HEAD · 1 file changed, 1 test file, 0 new packages, 0 config files\n\n! review   Tests weakened: 1 assertion removed, 0 added in their place, 1 check fewer.\n             test/cart.test.js:3  expect(total([])).toBe(0);\n           allowed: total([]) is now covered in test/empty.test.js\n\n✓ passed   No test files deleted.\n✓ passed   No tests skipped or focused.\n✓ passed   No new packages.\n✓ passed   No agent or CI configuration changed.\n\npassed · 1 to review.",
+      "after": "isoklo check · main...HEAD · 1 file changed, 1 test file, 0 new packages, 0 config files\n\n! review   Tests weakened: 1 assertion removed, 0 added in their place, 1 check fewer.\n           HIGH · tamper/assertions-removed\n             test/cart.test.js:3  expect(total([])).toBe(0);\n           why: Fewer assertions means less behaviour is checked; the build turns green because it checks less, not because the code is right.\n           allowed: total([]) is now covered in test/empty.test.js\n\n✓ passed   No test files deleted.\n✓ passed   No tests skipped or focused.\n✓ passed   No new packages.\n✓ passed   No agent or CI configuration changed.\n✓ passed   No hidden Unicode, prompt-override text or disabled agent approvals added.\n✓ passed   No unpinned, secret-bearing or over-reaching MCP servers added.\n✓ passed   No checks suppressed, guardrail configs weakened or coverage lowered.\n✓ passed   No untrusted lockfile sources, install-time scripts or registry changes.\n✓ passed   No secrets, remote code execution, exfiltration or unsafe workflow triggers added.\n✓ passed   No out-of-scope edits or sensitive areas changed alongside unrelated work.\n\npassed · 1 to review.",
       "afterExit": 0
     },
     "packages": {
       "npmrc": "@acme:registry=https://npm.acme.example/",
-      "before": "isoklo check · main...HEAD · 1 file changed, 0 test files, 1 new package, 0 config files\n\n! review   Package not found on public npm: @acme/invoice-theme. It may be private.\n             package.json:4  \"@acme/invoice-theme\": \"^1.0.0\",\n           fix: if @acme is a private scope, declare its registry in .npmrc; otherwise check the name.\n\n✓ passed   No test files changed.\n✓ passed   No agent or CI configuration changed.\n\npassed · 1 to review.",
+      "before": "isoklo check · main...HEAD · 1 file changed, 0 test files, 1 new package, 0 config files\n\n! review   Could not verify @acme/invoice-theme on npm: no answer within 8 seconds.\n           MEDIUM · deps/package-unverified\n             package.json:4  \"@acme/invoice-theme\": \"^1.0.0\",\n           why: Isoklo never passes a package it could not verify; it asks for review instead.\n           fix: run the check again when the registry is reachable.\n\n✓ passed   No test files changed.\n✓ passed   No agent or CI configuration changed.\n✓ passed   No hidden Unicode, prompt-override text or disabled agent approvals added.\n✓ passed   No unpinned, secret-bearing or over-reaching MCP servers added.\n✓ passed   No checks suppressed, guardrail configs weakened or coverage lowered.\n✓ passed   No untrusted lockfile sources, install-time scripts or registry changes.\n✓ passed   No secrets, remote code execution, exfiltration or unsafe workflow triggers added.\n✓ passed   No out-of-scope edits or sensitive areas changed alongside unrelated work.\n\npassed · 1 to review.",
       "beforeExit": 0,
-      "after": "isoklo check · main...HEAD · 2 files changed, 0 test files, 1 new package, 0 config files\n\n✓ passed   No test files changed.\n✓ passed   1 package in private scopes from .npmrc, not sent to the public registry.\n✓ passed   No agent or CI configuration changed.\n\npassed.",
+      "after": "isoklo check · main...HEAD · 2 files changed, 0 test files, 1 new package, 0 config files\n\n! review   Package source changed in .npmrc: points package installs at another registry or index.\n           HIGH · deps/registry-changed\n             .npmrc:1  @acme:registry=https://npm.acme.example/\n           why: Pointing npm or pip at another registry, adding an extra index, or turning TLS checks off enables dependency confusion and man-in-the-middle installs.\n           fix: confirm the registry belongs to your organisation and uses https; an extra index lets a public package with the same name as a private one win (dependency confusion).\n\n✓ passed   No test files changed.\n✓ passed   1 package in private scopes from .npmrc, not sent to the public registry.\n✓ passed   No agent or CI configuration changed.\n✓ passed   No hidden Unicode, prompt-override text or disabled agent approvals added.\n✓ passed   No unpinned, secret-bearing or over-reaching MCP servers added.\n✓ passed   No checks suppressed, guardrail configs weakened or coverage lowered.\n✓ passed   No secrets, remote code execution, exfiltration or unsafe workflow triggers added.\n✓ passed   No out-of-scope edits or sensitive areas changed alongside unrelated work.\n\npassed · 1 to review.",
       "afterExit": 0
     }
   }
