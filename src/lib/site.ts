@@ -35,6 +35,6 @@ export const author = {
   links: [
     { kind: "linkedin", label: "LinkedIn", detail: "p-sai-manish", href: "https://www.linkedin.com/in/p-sai-manish-9114bb314/" },
     { kind: "github", label: "GitHub", detail: "@manishguptha188", href: "https://github.com/manishguptha188" },
-    { kind: "mail", label: "Email", detail: "manish@euklo.com", href: "mailto:manish@euklo.com" },
+    { kind: "mail", label: "Email", detail: "hello@euklo.com", href: "mailto:hello@euklo.com" },
   ],
 } as const;
