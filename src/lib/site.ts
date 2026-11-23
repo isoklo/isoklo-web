@@ -6,10 +6,8 @@ export const site = {
     "Isoklo is a deterministic merge gate for AI-written pull requests. It blocks a change, with the exact line as evidence, when it weakens tests, invents a package, leaks a secret, or widens what agents and CI may do.",
   version: "0.2.0",
   license: "FSL-1.1-ALv2",
-  // NEXT_PUBLIC_SITE_URL wins; on Vercel, fall back to the project's production domain until isoklo.com is attached.
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://isoklo.com"),
+  // Isoklo's home is https://euklo.com/isoklo; vercel.json redirects this site there, and its links never name a Vercel address.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://euklo.com/isoklo",
   repo: "https://github.com/isoklo/isoklo",
   readme: "https://github.com/isoklo/isoklo#readme",
   changelog: "https://github.com/isoklo/isoklo/blob/main/CHANGELOG.md",
